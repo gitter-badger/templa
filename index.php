@@ -22,7 +22,7 @@ if(mb_substr($_SERVER['HTTP_REFERER'], 0, strlen($AppURL)) != $AppURL){
 
 $_SESSION['returnURL'] = $AppReturnURL;
 //TODO:RETURN設定
-$_SESSION['returnURL'] = $_SERVER['HTTP_REFERER']
+$_SESSION['returnURL'] = $_SERVER['HTTP_REFERER'];
 
 if(($_POST['image']==NULL)||($_POST['text']==NULL)){
 //TODO:エラー系はどこかにまとめる
@@ -87,6 +87,6 @@ $_SESSION['oauth_token_secret'] = $token['oauth_token_secret'];
 
 // Twitterの認証画面に遷移
 $authURL = $tw->getAuthorizeURL($_SESSION['oauth_token']);
-//header("Location: " . $authURL);
+header("Location: " . $authURL);
 exit;
 ?>
