@@ -1,8 +1,8 @@
 <?php
 //すべてのPHPファイルでこのファイルを読み込んで下さい
-require_once 'lib/tmhOAuth.php';
-require_once 'lib/twitteroauth.php';
-require_once 'lib/GifManipulator.php';
+require_once '../lib/tmhOAuth.php';
+require_once '../lib/twitteroauth.php';
+require_once '../lib/GifManipulator.php';
 
 define('TW_CONSUMER_KEY', 'きー');
 define('TW_CONSUMER_SECRET', 'しーくれっときー');

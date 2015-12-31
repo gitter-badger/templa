@@ -1,6 +1,10 @@
 <?php
 require_once('config.php');
 
+//TODO:DBからID等の取得
+$TwCk = TW_CONSUMER_KEY;
+$TxCks = TW_CONSUMER_SECRET;
+
 //つぶやく内容・帰り道があるかどうかチェック
 if(($_SESSION['postFilePath']==NULL)||($_SESSION['postText']==NULL)||($_SESSION['returnURL']==NULL)){
 	//TODO:エラー系はどこかにまとめる
@@ -21,7 +25,7 @@ if ($_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
     exit;
 }
 // user access token 取得
-$tw = new TwitterOAuth(TW_CONSUMER_KEY,TW_CONSUMER_SECRET,
+$tw = new TwitterOAuth($TwCk,$TwCks,
     $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
 $access_token = $tw->getAccessToken($_REQUEST['oauth_verifier']);
 $user_token     = $access_token['oauth_token'];
@@ -32,8 +36,8 @@ $user_token_secret = $access_token['oauth_token_secret'];
 
 $tw = new tmhOAuth(
 	array(
-		'consumer_key'    => TW_CONSUMER_KEY,
-		'consumer_secret' => TW_CONSUMER_SECRET,
+		'consumer_key'    => $TwCk,
+		'consumer_secret' => $TwCks,
 		'token'      => $user_token,
 		'secret'     => $user_token_secret,
 		'curl_ssl_verifypeer' => false ,

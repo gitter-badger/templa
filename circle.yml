@@ -1,0 +1,8 @@
+templa:
+  master:
+    branch: templa/master
+    commands:
+      - ssh skr:
+      - cd /home/nabettu/www/templa/:
+      - git fetch origin:
+      - git reset --hard origin/master:

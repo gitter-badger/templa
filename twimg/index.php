@@ -5,6 +5,8 @@ require_once 'config.php';
 $AppURL = APPURL;
 $AppReturnURL = APPRETURNURL;
 $AppID = APPID;
+$TwCk = TW_CONSUMER_KEY;
+$TxCks = TW_CONSUMER_SECRET;
 
 if($_GET['appid'] != $AppID){
 //TODO:エラー系はどこかにまとめる
@@ -76,8 +78,8 @@ $_SESSION['postText'] = $_POST['text'];
 
 
 //OAuthに必要な情報をセット
-$tw = new TwitterOAuth(TW_CONSUMER_KEY, TW_CONSUMER_SECRET);
-$token = $tw->getRequestToken(TW_CALLBACK_URL);
+$tw = new TwitterOAuth($TwCk, $TwCks);
+$token = $tw->getRequestToken();
 if(! isset($token['oauth_token'])){
     echo "error: getRequestToken\n";
     exit;
