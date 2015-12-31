@@ -1,5 +1,5 @@
 deployment:
-  master:
+  test:
     branch: templa/master
     commands:
       - ssh nabettu@nabettu.sakura.ne.jp "sh /home/nabettu/www/templa/gitpull.sh"
