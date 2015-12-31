@@ -3,6 +3,6 @@ test:
     - echo "-----start test-----"
 deployment:
   test:
-    branch: templa/master
+    branch: master
     commands:
       - ssh nabettu@nabettu.sakura.ne.jp "sh /home/nabettu/www/templa/gitpull.sh"
