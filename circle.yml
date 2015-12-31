@@ -1,4 +1,4 @@
-templa:
+deployment:
   master:
     branch: templa/master
     commands:
