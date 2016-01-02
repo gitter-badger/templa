@@ -1,6 +1,9 @@
 <?php
 require_once '../config.php';
 
+//画像保存先
+define('MEDIADIR', './medias/');
+
 //TODO:DBからID等の取得
 $AppURL = APPURL;
 $AppReturnURL = APPRETURNURL;
