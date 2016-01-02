@@ -1,7 +1,6 @@
 test:
-  pre:
-    commands:
-      - echo "test start"
+  override:
+    - echo "test start"
 deployment:
   prod:
     branch: master
