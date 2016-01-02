@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once '../config.php';
 
 //TODO:DBからID等の取得
 $AppURL = APPURL;
@@ -78,8 +78,8 @@ $_SESSION['postText'] = $_POST['text'];
 
 
 //OAuthに必要な情報をセット
-$tw = new TwitterOAuth($TwCk, $TwCks);
-$token = $tw->getRequestToken();
+$tw = new TwitterOAuth(TW_CONSUMER_KEY, TW_CONSUMER_SECRET);
+$token = $tw->getRequestToken(TW_CALLBACK_URL);
 if(! isset($token['oauth_token'])){
     echo "error: getRequestToken\n";
     exit;

@@ -1,5 +1,5 @@
 <?php
-require_once('config.php');
+require_once('../config.php');
 
 //TODO:DBからID等の取得
 $TwCk = TW_CONSUMER_KEY;
@@ -25,7 +25,7 @@ if ($_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
     exit;
 }
 // user access token 取得
-$tw = new TwitterOAuth($TwCk,$TwCks,
+$tw = new TwitterOAuth(TW_CONSUMER_KEY,TW_CONSUMER_SECRET,
     $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
 $access_token = $tw->getAccessToken($_REQUEST['oauth_verifier']);
 $user_token     = $access_token['oauth_token'];
@@ -36,8 +36,8 @@ $user_token_secret = $access_token['oauth_token_secret'];
 
 $tw = new tmhOAuth(
 	array(
-		'consumer_key'    => $TwCk,
-		'consumer_secret' => $TwCks,
+		'consumer_key'    => TW_CONSUMER_KEY,
+		'consumer_secret' => TW_CONSUMER_SECRET,
 		'token'      => $user_token,
 		'secret'     => $user_token_secret,
 		'curl_ssl_verifypeer' => false ,
@@ -62,7 +62,6 @@ chmod($tw_img, 0777);
 unlink($tw_img);
 
 //TODO:サービスにする際TWEETログを記録
-
 
 header("Location:".$_SESSION['returnURL']);
 

@@ -1,8 +1,9 @@
-test:
-  pre:
-    - echo "-----start test-----"
 deployment:
-  test:
+  prod:
     branch: master
     commands:
-      - ssh nabettu@nabettu.sakura.ne.jp "sh /home/nabettu/www/templa/gitpull.sh"
+      - ssh nabettu@nabettu.sakura.ne.jp
+      - cd /home/nabettu/www/templa/
+      - git fetch origin
+      - git reset --hard origin/master
+      - exit
