@@ -1,14 +1,10 @@
 test:
   override:
-    - echo "test start"
+    - echo "circle ci start"
 deployment:
   prod:
     branch: master
     commands:
       - echo "--- deployment start ---"
-      - ssh nabettu@nabettu.sakura.ne.jp
-      - cd /home/nabettu/www/templa/
-      - git fetch origin
-      - git reset --hard origin/master
-      - exit
+      - ssh nabettu@nabettu.sakura.ne.jp "sh /home/nabettu/www/templa/script/gitpull.sh"
       - echo "--- deployment end   ---"
