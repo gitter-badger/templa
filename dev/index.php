@@ -1,6 +1,5 @@
 <?php
 require_once '../config.php';
-
 //ログインチェック
 if ($_SESSION["user_name"] == null) {
     if($_REQUEST['oauth_token'] == null){

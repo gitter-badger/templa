@@ -11,7 +11,7 @@ $tw = new TwitterOAuth(TEMPLA_CONSUMER_KEY,TEMPLA_CONSUMER_SECRET,
     $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
 $access_token = $tw->getAccessToken($_REQUEST['oauth_verifier']);
 
-// Twitter の user_id + screen_name(表示名)
+// Twitter の user_id + screen_name(表示名)を取得
 $tw_user_id = $access_token['user_id'];
 $tw_screen_name = $access_token['screen_name'];
 $oauth_token = $access_token['oauth_token'];
@@ -33,6 +33,16 @@ if ($db_tw_user_id==NULL) {
             values
             ('".$tw_user_id."','".$tw_screen_name."','".$oauth_token."','".$oauth_token_secret."',now())";	//var_dump($sql);
 	$result = mysqli_query($link,$sql) or die("cannot send query<br />SQL:".$sql);
+
+//TODO:復数アプリ登録出来るようになったら消す
+    //ユーザー登録時にアプリを一個作る
+    $sql = "select * from `user` where `tw_user_id` = ".$tw_user_id." limit 1";
+    $result = mysqli_query($link,$sql) or die("cannot send query<br />SQL:".$sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $user_id = $row['user_id'];
+    }
+    $sql = "insert into `app` (`user_id`) values ('".$user_id."')";
+    $result = mysqli_query($link,$sql) or die("cannot send query<br />SQL:".$sql);
 } else {
 //登録済ユーザの場合：情報アップデート
     $sql = "UPDATE `user` SET `tw_username`='".$tw_screen_name."',`tw_access_token` = '".$oauth_token."',`tw_access_token_secret`='".$oauth_token_secret."'  WHERE  `tw_user_id` ='".$tw_user_id."';";
@@ -44,6 +54,7 @@ $sql = "select * from `user` where `tw_user_id` = ".$tw_user_id." limit 1";
 $result = mysqli_query($link,$sql) or die("cannot send query<br />SQL:".$sql);
 while ($row = mysqli_fetch_assoc($result)) {
     $_SESSION['user_name'] = $row['tw_username'];
+    $_SESSION['user_id'] = $row['user_id'];
 }
 if (!empty($tw_screen_name)) {
     // セッションハイジャック対策
