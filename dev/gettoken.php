@@ -1,6 +1,6 @@
 <?php
 $tw = new TwitterOAuth(TEMPLA_CONSUMER_KEY, TEMPLA_CONSUMER_SECRET);
-$token = $tw->getRequestToken();
+$token = $tw->getRequestToken(TEMPLA_CALLBACK_URL);
 
 if(!isset($token['oauth_token'])){
     //TODO:エラー系はどっかにまとめる

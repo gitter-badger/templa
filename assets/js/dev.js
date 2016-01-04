@@ -12,6 +12,7 @@ $(function() {
             "secret": $("#secret").val()
         };
         $("#savedMes").hide();
+        console.log(_data);
 
         $.ajax({
             url: $form.attr('action'),
@@ -26,11 +27,12 @@ $(function() {
             },
             success: function(result, textStatus, xhr) {
                 console.log("saved");
-                $("#savedMes").show();                
+                console.log(result);
+                $("#savedMes").show();
             },
             error: function(xhr, textStatus, error) {
                 console.log("error");
-                console.log(result);
+                console.log(xhr);
             }
         });
     });

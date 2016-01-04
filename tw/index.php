@@ -4,16 +4,21 @@ require_once '../config.php';
 //画像保存先
 define('MEDIADIR', './medias/');
 
-//TODO:DBからID等の取得
-$AppURL = APPURL;
-$AppReturnURL = APPRETURNURL;
-$AppID = APPID;
-$TwCk = TW_CONSUMER_KEY;
-$TxCks = TW_CONSUMER_SECRET;
+$link = mysqli_connect(DSN,DB_USER,DB_PASS) or die("MySQLへの接続に失敗しました。");
+$sdb = mysqli_select_db($link,DB_NAME) or die("データベースの選択に失敗しました。");
+$sql = "select * from `app` where `app_id` = ".$_GET['id']." limit 1";
+$result = mysqli_query($link,$sql) or die("cannot send query<br />SQL:".$sql);
+while ($row = mysqli_fetch_assoc($result)) {
+	$AppID = $row['app_id'];
+    $AppURL = $row['fromurl'];
+    $AppReturnURL = $row['returnurl'];
+    $_SESSION["TwCk"] = $row['tw_consumer_key'];
+    $_SESSION["TwCks"] = $row['tw_consumer_key_secret'];
+}
 
-if($_GET['appid'] != $AppID){
+if($_GET['id'] != $AppID){
 //TODO:エラー系はどこかにまとめる
-    echo $_GET['appid'];
+    echo "id=".$_GET['id'];
     echo "<br>登録されていないアプリです。";
     exit;
 }
@@ -25,9 +30,11 @@ if(mb_substr($_SERVER['HTTP_REFERER'], 0, strlen($AppURL)) != $AppURL){
     exit;
 }
 
-$_SESSION['returnURL'] = $AppReturnURL;
-//TODO:RETURN設定
-$_SESSION['returnURL'] = $_SERVER['HTTP_REFERER'];
+if($AppReturnURL == ""){
+    $_SESSION['returnURL'] = $AppURL;
+} else {
+    $_SESSION['returnURL'] = $AppReturnURL;
+}
 
 if(($_POST['image']==NULL)||($_POST['text']==NULL)){
 //TODO:エラー系はどこかにまとめる
@@ -77,11 +84,8 @@ switch ($extension) {
 $_SESSION['postFilePath'] = $filePath;
 $_SESSION['postText'] = $_POST['text'];
 
-//TODO:サービスにする際TOKENをDBから取得
-
-
 //OAuthに必要な情報をセット
-$tw = new TwitterOAuth(TW_CONSUMER_KEY, TW_CONSUMER_SECRET);
+$tw = new TwitterOAuth($_SESSION["TwCk"], $_SESSION["TwCks"]);
 $token = $tw->getRequestToken(TW_CALLBACK_URL);
 if(! isset($token['oauth_token'])){
     echo "error: getRequestToken\n";
