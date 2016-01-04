@@ -1,8 +1,10 @@
 $(function() {
     $("#savedMes").hide();
-    $('#saveForm').submit(function(event) {
+
+    var $form = $('#saveForm');
+
+    $form.submit(function(event) {
         event.preventDefault();
-        var $form = $(this);
         var $submitBtn = $("#saveSubmit");
 
         var _data = {
@@ -36,4 +38,24 @@ $(function() {
             }
         });
     });
+
+    (function dataLoad(){
+        $.ajax({
+            url: $form.attr('action'),
+            type: "GET",
+            timeout: 10000,
+            success: function(result, textStatus, xhr) {
+                console.log("loaded");
+                console.log(result);
+                $("#url").val(result.fromurl);
+                $("#return").val(result.returnurl);
+                $("#key").val(result.tw_consumer_key);
+                $("#secret").val(result.tw_consumer_key_secret);
+            },
+            error: function(xhr, textStatus, error) {
+                console.log("error");
+                console.log(xhr);
+            }
+        });
+    })()
 });
