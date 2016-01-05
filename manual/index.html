@@ -24,35 +24,46 @@
     <script src="jquery.min.js"></script>
 </head>
 <body>
-    <h1>templaべーた</h1>
-    <p>Twtterに代わりに投稿してくれるBaasやで</p>
-    <a href="./dev/">Twitterアカウントでログイン</a>
-    <br>
-    <br>
+    <h1>templaマニュアル</h1>
 
-    <h2>templaとは？</h2>
-    <p>画像付きツイートのサーバーサイドでの処理を代行するサービスです。</p>
-    <p>これを使えば、エンジニアはフロントエンドの開発のみに集中出来ますし、</p>
-    <p>性的Webサイトのみ(github pagesやamazon s3)で画像付きツイートを行うサービスが実現出来ます。</p>
-    <br>
-
-    <h2>どうやって使うの？</h2>
-    <p>Twitterでログインして、自分のアプリのアクセストークンと利用するURLを登録するだけです。</p>
-    <p>あとはあなたのWebサイトで作成された画像をbase64形式でtemplaに送るだけでユーザーは画像付きツイートを行えます。</p>
-    <br>
-
-    <h2>でも、お高いんでしょう？</h2>
-    <p>もちろん無料ですのでぜひ使ってみてください。</p>
-    <br>
-
-    <h2>利用例</h2>
+    <h2>サイトへの導入方法と利用例</h2>
+    <p>ログインした画面にあるコードをコピーし、つぶやきを行いたいサイトへ挿入して下さい。</p>
     <a href="https://nabettu.github.io/para2" target="_blank">GIF画像ジェネレータ</a>
     <p>こちらのサイトではjsでGif画像を生成出来ます、その後その画像をtemplaを通じてツイートすることが出来ます。</p>
     <p>ソースコードは<a href="https://github.com/nabettu/para2" target="_blank">こちら</a></p>
-    <p><a href="/manual/">マニュアルにも利用方法を記載しています</a></p>
     <br>
 
+    <h2>ツイートがちゃんとされない時があるんだけど・・・</h2>
+    <p>同じタイミングでめちゃくちゃサービスが使われてたりすると</p>
+    <p>（リアルタイム５００くらいまでなら耐えられると思われますが）</p>
+    <p>サーバーが混雑していて処理が行えない場合がございます。無料ですのでそこはご勘弁を。</p>
+    <p>同じアカウント同じ文言同じbase64画像で１度呟けた場合、設定は問題ありません。</p>
+    <br>
+
+    <h2>templaに適さないサイト</h2>
+    <p>「ユーザーに復数の中から決まった画像をツイートさせたい」</p>
+    <p>といった場合はこちらのブログに書いた方法を実施していただけると、</p>
+    <p>ユーザーに認証を通さずに画像をツイートしてもらえるためつぶやいてもらえやすくなります。</p>
+    <p>違う画像を随時生成して、それをつぶやかせたいという場合にtemplaは適しています。</p>
+    <br>
+
+    <h2>注意事項</h2>
+    <p>TwitterAPI設定でのcallbackURL先を固定するチェックボックスは付けないで下さい。</p>
+    <p>また、文字数が多いとつぶやきが行えないので、文言は１００字までとしてください。</p>
+    <br>
+
+    <h2>お問い合わせ</h2>
+    <p><a href="http://twitter.com/nabettu/" target="_blank">Twitter</a>か<a href="https://docs.google.com/forms/d/1IdIbpLQsTfRL0t6cCGQYpT-03c7ducAVhptXGpp34GM/viewform?usp=send_form" target="_blank">フォーム</a>へ入力どうぞ
+    <br>
+    <br>
+
+    <h2>利用開始</h2>
     <a href="/dev/">Twitterアカウントでログイン</a>
+    <br>
+    <br>
+
+    <a href="/">Topへ戻る</a>
+
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
