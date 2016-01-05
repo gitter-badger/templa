@@ -1,4 +1,3 @@
-<meta charset='UTF-8'>
 <?php
 require_once '../config.php';
 
@@ -19,6 +18,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 if($_GET['id'] != $AppID){
 //TODO:エラー系はどこかにまとめる
+	echo "<meta charset='UTF-8'>";
     echo "id=".$_GET['id'];
     echo "<br>登録されていないアプリです。";
     exit;
@@ -26,6 +26,7 @@ if($_GET['id'] != $AppID){
 
 if(mb_substr($_SERVER['HTTP_REFERER'], 0, strlen($AppURL)) != $AppURL){
 //TODO:エラー系はどこかにまとめる
+	echo "<meta charset='UTF-8'>";
     echo $_SERVER['HTTP_REFERER'];
     echo "<br>登録されていないURLからのPOSTです";
     exit;
@@ -39,6 +40,7 @@ if($AppReturnURL == ""){
 
 if(($_POST['image']==NULL)||($_POST['text']==NULL)){
 //TODO:エラー系はどこかにまとめる
+	echo "<meta charset='UTF-8'>";
     echo '必要な情報がPOSTされていません';
 	exit;
 }
@@ -77,6 +79,7 @@ switch ($extension) {
         break;
     default:
 //TODO:エラー系はどこかにまとめる
+		echo "<meta charset='UTF-8'>";
         echo 'ファイル形式が不正です';
         exit;
 }

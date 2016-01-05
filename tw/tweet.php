@@ -1,10 +1,10 @@
-<meta charset='UTF-8'>
 <?php
 require_once('../config.php');
 
 //つぶやく内容・帰り道があるかどうかチェック
 if(($_SESSION['postFilePath']==NULL)||($_SESSION['postText']==NULL)||($_SESSION['returnURL']==NULL)){
 	//TODO:エラー系はどこかにまとめる
+	echo "<meta charset='UTF-8'>";
 	echo 'サーバーエラー<br>ファイルが存在しないか、つぶやく内容が空です';
 	echo $_SESSION['postFilePath'];
 	echo $_SESSION['postText'];
@@ -18,6 +18,7 @@ $tw_text = $_SESSION['postText'];
 // セットした oauth_token と一致するかチェック
 if ($_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
 	//TODO:エラー系はどこかにまとめる
+	echo "<meta charset='UTF-8'>";
 	echo 'サーバーエラー<br>oauth tokenが一致しません';
 	unset($_SESSION);
     exit;
